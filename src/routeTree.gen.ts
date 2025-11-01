@@ -15,7 +15,6 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-  // biome-ignore lint/suspicious/noExplicitAny: Tanstack Router core
 } as any)
 
 export interface FileRoutesByFullPath {

@@ -1,33 +1,43 @@
-import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
-import { Activity } from 'react'
+import { ArrowRightIcon } from 'lucide-react'
+import { Logo } from '@/components/logo'
+import { SignInModal } from '@/components/sign-in-modal'
+import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/')({
   component: Index,
 })
 
 function Index() {
-  const { data, isLoading } = useQuery({
-    queryKey: ['posts'],
-    queryFn: async () => {
-      const response = await fetch(
-        'https://jsonplaceholder.typicode.com/posts/1',
-      )
-      const data = await response.json()
-
-      return data
-    },
-  })
-
   return (
-    <div className="min-h-screen">
-      {isLoading && <span>carregando...</span>}
+    <main className="min-h-screen flex flex-col items-center space-y-10 p-6 lg:py-16">
+      <div className="py-1 px-7 rounded-full bg-foreground/5 ring ring-primary">
+        <Logo />
+      </div>
 
-      <Activity mode={isLoading ? 'hidden' : 'visible'}>
-        <div className="max-w-3xs">
-          <pre>{JSON.stringify(data, null, 2)}</pre>
-        </div>
-      </Activity>
-    </div>
+      <div className="max-w-2xl space-y-4 text-center">
+        <h1 className="text-4xl font-bold leading-snug tracking-tight sm:text-5xl">
+          Free repo for your software projects
+        </h1>
+        <p className="text-lg font-medium text-muted-foreground">
+          Save and share your software projects
+        </p>
+
+        <SignInModal>
+          <Button size="lg">
+            Get started
+            <ArrowRightIcon className="size-4" />
+          </Button>
+        </SignInModal>
+      </div>
+
+      {/* TODO: Add app screen */}
+      <div className="w-full bg-zinc-900 aspect-video rounded-md shadow-lg shadow-black/10 ring ring-black/10" />
+      {/* <img
+        src="/app-screen.webp"
+        alt="App screen"
+        className="w-full aspect-video rounded-md shadow-lg shadow-black/10 ring ring-black/10"
+      /> */}
+    </main>
   )
 }
