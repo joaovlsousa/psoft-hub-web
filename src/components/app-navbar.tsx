@@ -11,9 +11,7 @@ import { SidebarTrigger } from './ui/sidebar'
 export function AppNavbar() {
   const { href } = useLocation()
 
-  const [_, ...paths] = href.split('/')
-  const breadcrumps =
-    paths.length > 2 ? [paths[0], paths[paths.length - 1]] : paths
+  const breadcrumps = href.split('/').filter((path) => path)
 
   return (
     <div className="w-full h-14 px-4 flex items-center gap-x-4 bg-sidebar/20 border-b">

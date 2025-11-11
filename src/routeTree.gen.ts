@@ -14,6 +14,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppProjectsIndexRouteImport } from './routes/_app/projects/index'
 import { Route as AuthCallbackGithubRouteRouteImport } from './routes/auth/callback/github/route'
 import { Route as AppProjectsCreateIndexRouteImport } from './routes/_app/projects/create/index'
+import { Route as AppProjectsProjectIdEditIndexRouteImport } from './routes/_app/projects/$projectId/edit/index'
 
 const AppRouteRoute = AppRouteRouteImport.update({
   id: '/_app',
@@ -39,18 +40,26 @@ const AppProjectsCreateIndexRoute = AppProjectsCreateIndexRouteImport.update({
   path: '/projects/create/',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppProjectsProjectIdEditIndexRoute =
+  AppProjectsProjectIdEditIndexRouteImport.update({
+    id: '/projects/$projectId/edit/',
+    path: '/projects/$projectId/edit/',
+    getParentRoute: () => AppRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth/callback/github': typeof AuthCallbackGithubRouteRoute
   '/projects': typeof AppProjectsIndexRoute
   '/projects/create': typeof AppProjectsCreateIndexRoute
+  '/projects/$projectId/edit': typeof AppProjectsProjectIdEditIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth/callback/github': typeof AuthCallbackGithubRouteRoute
   '/projects': typeof AppProjectsIndexRoute
   '/projects/create': typeof AppProjectsCreateIndexRoute
+  '/projects/$projectId/edit': typeof AppProjectsProjectIdEditIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -59,12 +68,23 @@ export interface FileRoutesById {
   '/auth/callback/github': typeof AuthCallbackGithubRouteRoute
   '/_app/projects/': typeof AppProjectsIndexRoute
   '/_app/projects/create/': typeof AppProjectsCreateIndexRoute
+  '/_app/projects/$projectId/edit/': typeof AppProjectsProjectIdEditIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth/callback/github' | '/projects' | '/projects/create'
+  fullPaths:
+    | '/'
+    | '/auth/callback/github'
+    | '/projects'
+    | '/projects/create'
+    | '/projects/$projectId/edit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth/callback/github' | '/projects' | '/projects/create'
+  to:
+    | '/'
+    | '/auth/callback/github'
+    | '/projects'
+    | '/projects/create'
+    | '/projects/$projectId/edit'
   id:
     | '__root__'
     | '/'
@@ -72,6 +92,7 @@ export interface FileRouteTypes {
     | '/auth/callback/github'
     | '/_app/projects/'
     | '/_app/projects/create/'
+    | '/_app/projects/$projectId/edit/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -117,17 +138,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProjectsCreateIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/_app/projects/$projectId/edit/': {
+      id: '/_app/projects/$projectId/edit/'
+      path: '/projects/$projectId/edit'
+      fullPath: '/projects/$projectId/edit'
+      preLoaderRoute: typeof AppProjectsProjectIdEditIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
   }
 }
 
 interface AppRouteRouteChildren {
   AppProjectsIndexRoute: typeof AppProjectsIndexRoute
   AppProjectsCreateIndexRoute: typeof AppProjectsCreateIndexRoute
+  AppProjectsProjectIdEditIndexRoute: typeof AppProjectsProjectIdEditIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppProjectsIndexRoute: AppProjectsIndexRoute,
   AppProjectsCreateIndexRoute: AppProjectsCreateIndexRoute,
+  AppProjectsProjectIdEditIndexRoute: AppProjectsProjectIdEditIndexRoute,
 }
 
 const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
