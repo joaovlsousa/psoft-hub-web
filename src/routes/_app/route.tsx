@@ -23,10 +23,10 @@ function RouteComponent() {
     <SidebarProvider>
       <AppSidebar />
 
-      <main className="w-full min-h-screen">
+      <main className="relative w-full min-h-screen">
         <AppNavbar />
 
-        <div className="p-6">
+        <div className="mt-14 p-6">
           <Outlet />
         </div>
       </main>

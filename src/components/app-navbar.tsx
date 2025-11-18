@@ -14,7 +14,7 @@ export function AppNavbar() {
   const breadcrumps = href.split('/').filter((path) => path)
 
   return (
-    <div className="w-full h-14 px-4 flex items-center gap-x-4 bg-sidebar/20 border-b">
+    <div className="fixed z-10 w-full h-14 px-4 flex items-center gap-x-4 bg-soft border-b">
       <SidebarTrigger />
 
       <Breadcrumb>
